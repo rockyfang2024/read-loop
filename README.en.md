@@ -51,10 +51,10 @@ With read-loop active and a book available in the conversation, type:
 | `/rl critique` | Assess the argument, evidence, assumptions, and limits after stating it fairly |
 | `/rl compare` | Compare multiple books' answers, evidence, assumptions, and disagreements on a topic |
 | `/rl hot` | Find notable professional reviews and recent discussion, compare views, and cite sources |
-| `/rl word` | Select a few memorable short quotes or dialogue excerpts, with context |
+| `/rl word` | Find notable lines and dialogue online, verify them in the supplied edition, and cite chapters and reliable page numbers |
 | `/rl read` | Start optional interactive chapter-by-chapter reading |
 
-Add a scope when useful, such as `/rl question chapter 12`, `/rl critique the CUDA argument`, or `/rl compare these books on AI`. These are text shortcuts for the agent, not native slash commands required by the host app. `/rl hot` requires web search from the host; it separates professional reviews from recent discussion and reports only popularity metrics visible on the source pages. Search rank alone is not treated as popularity. The quote command returns only a few short excerpts so it does not substitute for the book.
+Add a scope when useful, such as `/rl question chapter 12`, `/rl critique the CUDA argument`, or `/rl compare these books on AI`. These are text shortcuts for the agent, not native slash commands required by the host app. `/rl hot` and `/rl word` require web search from the host. `/rl hot` separates professional reviews from recent discussion and reports only popularity metrics visible on source pages; search rank alone is not treated as popularity. `/rl word` uses web results to discover candidate lines, dialogue, and images, then verifies each one in the supplied edition. It cites chapters and gives page numbers only when they can be verified for that edition. Unverified web quotations are excluded or clearly labeled, and excerpts stay brief.
 
 ## Case studies
 
