@@ -2,17 +2,17 @@
 
 [简体中文](README.md) · **English**
 
-**AI-guided active reading: ask, predict, read, recall, apply.**
+**Deconstruct the whole book: structure, characters, arguments, themes, evidence, and endings.**
 
-`read-loop` is a cross-agent Agent Skill for understanding books with an AI reading coach. It helps readers decide what to read, enter each chapter with useful questions, recall ideas before seeing a summary, check answers against the text, and turn insights into action.
+`read-loop` is a cross-agent Skill for deconstructing complete books. It reads as much of the available source as possible, then maps its structure and analyzes its ideas or narrative, people, arguments, themes, turning points, strengths, and limits with chapter references. Fiction analysis may include the complete plot and ending.
 
-It is designed to keep the reader thinking. The AI prepares a map and questions first, then waits for the reader's prediction or recall before explaining. It distinguishes an author's claim from the evidence in the book and the coach's own interpretation, and preserves disagreements between authors.
+PDF/EPUB extraction is only source preparation, not the product. Chapter-by-chapter questioning, recall, and feedback remain available as an optional interactive reading mode.
 
 ## Features
 
-- **Scout before deep reading** — map a book's structure and choose a route that fits your goal and available time.
-- **Ask before answering** — get a few guiding questions before reading; explanations wait until after you try to recall the ideas.
-- **Learn from the source** — connect feedback to chapters and sections, and separate the author's claims, the book's evidence, and AI interpretation.
+- **Deconstruct the whole book** — explain the structure, through-line, and role of each part; state actual source coverage.
+- **Adapt to genre** — focus on claims, concepts, evidence, and assumptions in nonfiction; plot, character development, narrative choices, themes, and ending in fiction.
+- **Analyze from the source** — cite chapters and sections, separating author claims, book evidence, and AI interpretation.
 - **Keep disagreements intact** — compare authors and schools of thought without blending different positions into a false consensus.
 - **Use timelines when chronology matters** — for biographies, histories, and similar books, select key milestones into a complete, chapter-referenced timeline.
 - **Turn ideas into practice** — capture conditions, limitations, applications, and review questions in compact chapter notes.
@@ -28,11 +28,13 @@ For a personal installation, place this repository at `~/.agents/skills/read-loo
 
 ## Quick start
 
-Give your agent a book file or extracted text and say what you want, for example:
+Give your agent a book file or extracted text. By default, read-loop deconstructs the complete available book. For interactive reading, explicitly ask to proceed section by section and wait for your recall, for example:
 
 ```text
-Use read-loop with this EPUB. First give me a spoiler-free structure map and a 20-minute reading route. Then guide me chapter by chapter: ask questions before showing explanations, wait for my answers, and check my recall against the book with chapter references.
+Use read-loop to deconstruct this book. Cover all available chapters, report source coverage, then map the complete plot, major characters and their development, narrative structure, themes, and ending. Cite chapters for each major point.
 ```
+
+Interactive reading is optional. Use `/rl read` to move through one chapter at a time with questions, recall, and source-grounded feedback.
 
 ### Short commands
 
@@ -40,15 +42,16 @@ With read-loop active and a book available in the conversation, type:
 
 | Command | Task |
 | --- | --- |
+| `/rl analyze` | Deconstruct the whole book's structure, ideas or plot, themes, and limits |
+| `/rl map` | Map the book's structure and explain the role of each part |
 | `/rl time` | Build a timeline of the book's key events |
-| `/rl map` | Survey the subject, structure, and chapters worth close reading |
-| `/rl analyze` | Analyze the book's main question, structure, concepts, reasoning, and open issues |
 | `/rl terms` | Explain key terms and how the author relates the concepts |
 | `/rl question` | Develop the book's core questions for reflection |
-| `/rl people` | Introduce important people and their roles or relationships |
+| `/rl people` | Explain key people, relationships, development, and endings across the book |
 | `/rl critique` | Assess the argument, evidence, assumptions, and limits after stating it fairly |
 | `/rl compare` | Compare multiple books' answers, evidence, assumptions, and disagreements on a topic |
 | `/rl word` | Select a few memorable short quotes or dialogue excerpts, with context |
+| `/rl read` | Start optional interactive chapter-by-chapter reading |
 
 Add a scope when useful, such as `/rl question chapter 12`, `/rl critique the CUDA argument`, or `/rl compare these books on AI`. These are text shortcuts for the agent, not native slash commands required by the host app. The quote command returns only a few short excerpts so it does not substitute for the book.
 
@@ -58,8 +61,8 @@ Add a scope when useful, such as `/rl question chapter 12`, `/rl critique the CU
 
 ## Modes
 
-- **Scout** — build a structure map and decide whether, why, and how deeply to read.
-- **Guided reading** — work through chapters using prediction, reading, recall, feedback, and application.
+- **Whole-book deconstruction (default)** — analyze all available material, adapting to fiction, biography, history, technical books, and other genres.
+- **Guided reading (optional)** — work through chapters using prediction, reading, recall, feedback, and application.
 - **Compare** — compare authors, schools of thought, evidence, and disagreements without forcing a single conclusion.
 - **Review** — revisit saved notes through recall questions and spaced review.
 
@@ -85,7 +88,7 @@ The script writes a manifest and extracted chapter text under a temporary direct
 
 ## How it works
 
-The workflow borrows established active-reading patterns—chapter digests, guiding questions, notes, and chapter-by-chapter discussion—while making delayed answers, closed-book recall, evidence checking, and application the central loop. It does not require a specific model provider or a live reading app.
+The default workflow deconstructs complete books; active-reading methods such as guiding questions, closed-book recall, evidence checks, and chapter-by-chapter discussion are optional. It does not require a specific model provider or a live reading app.
 
 Related projects that informed the interaction design include [Crossbill](https://github.com/Crossbill-App/crossbill-web) (chapter digests, questions, highlights, and notes), [pi-tree](https://github.com/shuowu/pi-tree) (guided chapter reading and branching discussions), and [Feynman](https://github.com/steveyeow/Feynman) (pre-reading questions and book scouting). [book-to-skill](https://github.com/virgiliojr94/book-to-skill) is a useful companion when the goal is to turn a book's frameworks into a reusable agent skill rather than guide a reader through the book. This repository borrows workflow ideas, not their implementation code.
 

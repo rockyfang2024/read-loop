@@ -1,5 +1,41 @@
 # Output templates
 
+## Whole-book decomposition (default)
+
+```markdown
+# <Book title> — complete decomposition
+
+**Author:** <name>
+**Book type:** <type; explicit / inferred / uncertain>
+**Source coverage:** <chapters or sections reviewed; extraction gaps>
+**Spoiler scope:** Full-book analysis, including ending
+
+## Through-line
+<Central question, premise, or problem and the book's overall answer or movement>
+
+## Structure
+| Part / chapter | Role in the whole | Key developments or claims |
+|---|---|---|
+
+## Main analysis
+<Adapt to genre: for fiction, plot arc, character relationships/development, narrative choices, themes, ending; for nonfiction, concepts, claims, reasoning, evidence, assumptions, applications>
+
+## Key people / concepts
+<Introduce and connect the people or concepts essential to understanding the book>
+
+## Themes, tensions, and turning points
+<Recurring ideas, disagreements, changes, and moments that reshape the whole>
+
+## Critical assessment
+<What the book supports well, where its evidence or interpretation is limited, and what remains unresolved>
+
+## Questions for the reader
+<Questions that deepen understanding; provide answers too when requested>
+
+## Source trail
+<Chapter and section references for the main findings>
+```
+
 ## Book map
 
 ```markdown

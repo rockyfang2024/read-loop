@@ -1,17 +1,17 @@
 ---
 name: read-loop
-description: "Coach active book reading with questions and recall."
+description: "Deconstruct complete books into structured, source-grounded analyses."
 ---
 
 # read-loop
 
-Help the reader understand a book without turning reading into passive consumption. The reader does the thinking; the AI maps, questions, listens, checks evidence, and gives targeted feedback.
+Help the reader understand a book by deconstructing the complete work: its structure, ideas or narrative, people, evidence, themes, turning points, and implications. Ground findings in the source and make coverage limits explicit.
 
-The distinctive product is the **read–recall–feedback loop**, not PDF extraction or unrestricted question answering. Extraction only makes the source available. For an ordinary request to read or analyze a book, guide the reader through a small sequence: map the book, choose a useful section, ask before-reading questions, wait for the reader to read and recall, then check that recall against the source and apply one idea. Do not dump every answer at the start. If the reader explicitly asks for a standalone deliverable (such as a timeline, summary, or list of questions), produce that deliverable directly, grounded in the source, and offer the loop as a next step.
+The default is **whole-book decomposition**, not a spoiler-free preview or a staged reading exercise. Read the available book across its chapters, synthesize the full arc, and include necessary endings and conclusions. Do not withhold answers because the reader has not attempted recall. The guided read–recall–feedback loop remains available when the reader explicitly asks to read interactively. Extraction only makes the source available; it is not the product.
 
 ## Core rules
 
-1. **Do not give away answers before the reader attempts them.** In guided reading, present the pre-reading questions first and wait. After the reader reads, ask for closed-book recall before showing a summary or model answer.
+1. **Follow the requested mode.** Whole-book analysis may reveal the complete plot and conclusions. Only withhold answers and wait for recall in an explicitly requested guided-reading session.
 2. **Ground book claims in the source.** Cite chapter and section headings; include page numbers only when the source provides reliable page numbers. If you cannot locate support, say so. Do not fabricate quotes, page numbers, or chapter details.
 3. **Separate three layers:** what the author claims, what evidence or examples the book provides, and what the AI infers. Label them when analyzing substantive claims.
 4. **Keep disagreement visible.** Attribute claims to their authors and conditions. Do not average conflicting views into a false consensus.
@@ -22,10 +22,11 @@ The distinctive product is the **read–recall–feedback loop**, not PDF extrac
 
 ## Choose a mode
 
-Infer the mode from the request. If unclear, begin with Scout and offer a sensible next step rather than asking a broad setup questionnaire.
+Infer the mode from the request. If unclear, default to whole-book decomposition. Use Scout only when the reader asks for a quick overview or help deciding whether to read; use guided reading only when they ask to proceed interactively.
 
+- **Whole-book decomposition (default):** User wants to read, understand, or analyze a supplied book.
 - **Scout:** User wants to decide whether a book is worth reading, or needs a fast overview.
-- **Guided reading:** User wants to read actively and retain ideas.
+- **Guided reading:** User explicitly wants to read actively and retain ideas one section at a time.
 - **Compare:** User wants to compare authors, arguments, or schools of thought.
 - **Review:** User wants to retrieve and strengthen previously read material.
 
@@ -40,14 +41,15 @@ When the reader types one of these shortcuts, interpret it as the corresponding 
 | Shortcut | Task |
 | --- | --- |
 | `/rl time` | Organize the book's key events into a chronological timeline, with significance and chapter references. Mark uncertain dates; do not invent them. |
-| `/rl map` | Give an inspectional reading map: subject, structure, role of each part, likely central question, and chapters worth reading closely. Mark hypotheses and coverage limits. |
-| `/rl analyze` | Analyze the book's unity, parts, central questions, key terms, claims, reasoning, evidence, and unresolved issues. Cite chapters/sections and separate the author's claims from AI inference. |
+| `/rl map` | Map the complete book's structure and explain the role of each part. For fiction, show the narrative arc; for nonfiction, show the argument's progression. Mark coverage limits. |
+| `/rl analyze` | Deconstruct the complete book: structure, central questions, key ideas or narrative, reasoning or character arcs, evidence or turning points, themes, strengths, limits, and unresolved issues. Cite chapters/sections and separate source claims from AI inference. |
 | `/rl terms` | Identify and explain important terms as the author uses them, including distinctions and relationships among concepts; cite source locations. |
 | `/rl question` | Develop the book's core questions for reflection, covering its claims, reasoning, evidence, tensions, and implications. Give questions without answers unless asked. |
-| `/rl people` | Introduce the important people in the book, explain their roles and relationships, and cite the relevant chapters. For fiction, include spoilers only if requested or clearly implied. |
+| `/rl people` | Explain the important people across the whole book, including their roles, relationships, development, and endings where relevant. Cite chapters. |
 | `/rl critique` | First state the author's argument accurately, then assess its reasoning, evidence, assumptions, counterexamples, and limits. Distinguish what the text establishes from what remains uncertain. |
 | `/rl compare` | Compare the available books or authors around the reader's topic: shared questions, different answers, evidence, assumptions, and points of disagreement. Do not force a consensus. |
-| `/rl word` | Select a few memorable short lines or dialogue excerpts, each with speaker/context and chapter location; add a brief note on why each matters. Keep quotations short and prefer paraphrase when a passage is not essential. |
+| `/rl word` | Select a few memorable short lines or dialogue excerpts from across the book, with speaker/context, chapter location, and why each matters. Keep quotations brief and prefer paraphrase when a passage is not essential. |
+| `/rl read` | Start an optional guided-reading session. Work one section at a time; ask, wait for the reader's recall, then check it against the text. |
 
 The reader may add a scope, such as `/rl question 第12章`, `/rl critique 作者关于 CUDA 的论证`, or `/rl compare 人工智能相关的这几本书`. A direct shortcut request is a standalone task and should not be blocked by the guided-reading pause. For `/rl compare`, ask for the missing books or topic only if they are not available in the conversation.
 
@@ -57,16 +59,18 @@ The reader may add a scope, such as `/rl question 第12章`, `/rl critique 作�
 - **Guided reading:** “用 read-loop 带我读这本书。每次只处理一章：先给章节作用和不超过三个问题，等我读完并复述后再反馈。”
 - **Compare books:** “用 read-loop 比较这几本书的主张、证据、假设和适用条件，标出真正的分歧，不要强行合并结论。”
 
-## Default first response
+## Default: deconstruct the whole book
 
-When a reader supplies a book and asks to read, understand, or analyze it without specifying a standalone output, do not start with a long-form summary. First inspect enough of the source to establish coverage, book type, structure, and extraction limits. Then return:
+When a reader supplies a book and asks to read, understand, or analyze it without specifying a narrower output, analyze the complete available source. First establish coverage, book type, structure, and extraction limits. Read chapters in bounded sections as needed; do not treat a skim as full-book analysis. Then return a useful decomposition, adapted to the genre:
 
-1. A compact reading map: central question, thesis hypothesis, major sections, and what is uncertain.
-2. A recommended first section and why it is a good starting point for the reader's likely goal.
-3. At most two pre-reading questions, with no answers shown.
-4. A clear invitation to read that section and return with a closed-book explanation.
+1. **Book identity and coverage:** type, edition/translation if available, chapters or sections read, extraction gaps, and confidence.
+2. **Whole-book map:** central question or premise, thesis when applicable, structure, and each part's role.
+3. **Decomposition:** for nonfiction, key concepts, claims, reasoning, evidence, assumptions, disagreements, and applications; for fiction, full plot arc, character relationships and development, narrative choices, themes, and ending.
+4. **Chronology where useful:** a complete timeline of major milestones for biographies, histories, memoirs, and other chronology-rich books.
+5. **Critical reading:** what the book establishes well, where its support or interpretation is limited, and what remains unresolved. Distinguish the author's claims, source evidence, and AI inference.
+6. **Reader tools:** key questions, important people or concepts, and a suggested route back to the chapters for closer reading.
 
-Pause for the reader. Continue with recall and feedback only after they respond or explicitly request answer-first analysis. The reader can change modes at any time. Direct requests for a timeline, quote themes, discussion prompts, or other defined outputs should be completed without forcing this pause-first flow.
+Use the whole-book decomposition template in `references/templates.md`. Do not hide plot developments or conclusions to avoid spoilers. If the source is too large or incompletely extracted, state which sections were actually reviewed and label the result partial; continue working through the rest when available. The reader can request `/rl read` at any time to switch to guided reading.
 
 ## Workflow
 
@@ -76,7 +80,7 @@ Identify the supplied file or text and confirm that it is the intended book. If 
 
 Infer the book's type from its title page, subtitle, contents, introduction, and other available metadata. Label the type as explicit, inferred, or uncertain. Do not overstate genre when evidence is thin.
 
-Ask only for information that changes the reading route. If the reader has not given a goal or time budget, assume a general understanding goal and propose a 20-minute Scout route.
+Ask only for information that changes the reading route. If the reader has not given a goal or time budget, assume a general understanding goal and deconstruct the full available book. Do not substitute a short Scout route unless requested.
 
 ### 2. Build a structure map
 
@@ -139,4 +143,4 @@ Read `references/protocol.md` for detailed question design and `references/templ
 
 ## Completion
 
-At the end of a Scout or reading session, give a brief status: what the reader can now explain, what remains uncertain, the next useful chapter or review question, and the source locations supporting important conclusions. Never describe a skim as mastery.
+At the end of a whole-book analysis, summarize the book's central through-line, major insights, unresolved questions, source coverage, and chapter locations supporting important conclusions. Never describe a skim as full-book decomposition. In guided reading, report what the reader recalled, what remains uncertain, and the next useful chapter or review question.

@@ -1,4 +1,19 @@
-# Reading protocol
+# Whole-book deconstruction and reading protocol
+
+## Default: deconstruct the complete book
+
+When a book is supplied without a narrower task, analyze the full available source. Do not withhold plot developments or conclusions to avoid spoilers. Read chapters in bounded sections when needed, and report exactly what was covered. A skim is a scout, not a whole-book analysis.
+
+Adapt the decomposition to the genre:
+
+- **Fiction:** complete plot arc and ending, character relationships and development, narrative perspective and structure, recurring images, themes, and unresolved tensions.
+- **Biography/history:** central subject or question, chronology, turning points, actors, causal claims, evidence, and the author's interpretation.
+- **Expository/technical nonfiction:** central problem and thesis, structure, key terms, claims, reasoning, evidence, assumptions, disagreements, applications, and open questions.
+- **Anthology or multi-author book:** identify each contributor and attribute claims to the correct author.
+
+For substantive findings, cite chapter or section. Separate what the author states, what examples or evidence the book supplies, and what the AI infers. State extraction gaps and unread sections; do not imply complete coverage when it is partial.
+
+The reader may request a narrower output such as a timeline, character map, questions, or critique. The `/rl read` command switches to the optional staged reading mode below.
 
 ## Write useful questions
 
@@ -13,16 +28,16 @@ Good questions make the reader retrieve, explain, test, or use an idea. Prefer:
 
 Avoid questions answered by a name, date, or isolated definition unless that detail is essential to later reasoning. Ask two or three questions per chapter at most, chosen for the reader's goal.
 
-## Keep answers hidden until retrieval
+## Optional guided-reading loop
 
-Use progressive disclosure:
+Only use progressive disclosure when the reader requests guided reading:
 
 1. Show the chapter purpose and questions.
 2. Wait for a prediction or the reader to finish reading.
 3. Ask for a brief answer from memory.
 4. Only then reveal a hint, correction, or synthesis.
 
-If the reader explicitly asks for a summary before attempting recall, provide it, but mark that the recall step was skipped. Never shame the reader for using a different mode.
+In this mode, if the reader asks for a summary before attempting recall, provide it and mark that the recall step was skipped. Never shame the reader for using a different mode.
 
 ## Give specific feedback
 
@@ -53,7 +68,7 @@ Do not assign false precision such as a comprehension percentage unless the read
 - Give every entry a chapter or section reference. Mark whether the date is explicit, approximate, a range, or disputed. Use “date not specified” when appropriate; never manufacture precision.
 - Keep the event summary brief and explain its role in the narrative or argument. Do not treat temporal sequence alone as proof of causation.
 
-## Fast-reading routes
+## Optional fast-reading routes
 
 ### Ten-minute scout
 
