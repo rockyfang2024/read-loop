@@ -70,6 +70,7 @@ PDF/EPUB 提取只是读取原文的准备步骤，不是项目的核心价值�
 ## 案例列表
 
 - [《窄门》书籍拆解](examples/zhai-men-case.zh-CN.md)
+- [《局外人》书籍拆解](examples/ju-wai-ren-case.zh-CN.md)
 
 ## 阅读模式
 
