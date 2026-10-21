@@ -41,11 +41,16 @@ With read-loop active and a book available in the conversation, type:
 | Command | Task |
 | --- | --- |
 | `/rl time` | Build a timeline of the book's key events |
+| `/rl map` | Survey the subject, structure, and chapters worth close reading |
+| `/rl analyze` | Analyze the book's main question, structure, concepts, reasoning, and open issues |
+| `/rl terms` | Explain key terms and how the author relates the concepts |
 | `/rl question` | Develop the book's core questions for reflection |
 | `/rl people` | Introduce important people and their roles or relationships |
+| `/rl critique` | Assess the argument, evidence, assumptions, and limits after stating it fairly |
+| `/rl compare` | Compare multiple books' answers, evidence, assumptions, and disagreements on a topic |
 | `/rl word` | Select a few memorable short quotes or dialogue excerpts, with context |
 
-Add a scope when useful, such as `/rl question chapter 12` or `/rl people Nvidia's early years`. These are text shortcuts for the agent, not native slash commands required by the host app. The quote command returns only a few short excerpts so it does not substitute for the book.
+Add a scope when useful, such as `/rl question chapter 12`, `/rl critique the CUDA argument`, or `/rl compare these books on AI`. These are text shortcuts for the agent, not native slash commands required by the host app. The quote command returns only a few short excerpts so it does not substitute for the book.
 
 ## Case studies
 

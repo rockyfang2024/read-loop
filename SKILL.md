@@ -40,11 +40,16 @@ When the reader types one of these shortcuts, interpret it as the corresponding 
 | Shortcut | Task |
 | --- | --- |
 | `/rl time` | Organize the book's key events into a chronological timeline, with significance and chapter references. Mark uncertain dates; do not invent them. |
+| `/rl map` | Give an inspectional reading map: subject, structure, role of each part, likely central question, and chapters worth reading closely. Mark hypotheses and coverage limits. |
+| `/rl analyze` | Analyze the book's unity, parts, central questions, key terms, claims, reasoning, evidence, and unresolved issues. Cite chapters/sections and separate the author's claims from AI inference. |
+| `/rl terms` | Identify and explain important terms as the author uses them, including distinctions and relationships among concepts; cite source locations. |
 | `/rl question` | Develop the book's core questions for reflection, covering its claims, reasoning, evidence, tensions, and implications. Give questions without answers unless asked. |
 | `/rl people` | Introduce the important people in the book, explain their roles and relationships, and cite the relevant chapters. For fiction, include spoilers only if requested or clearly implied. |
+| `/rl critique` | First state the author's argument accurately, then assess its reasoning, evidence, assumptions, counterexamples, and limits. Distinguish what the text establishes from what remains uncertain. |
+| `/rl compare` | Compare the available books or authors around the reader's topic: shared questions, different answers, evidence, assumptions, and points of disagreement. Do not force a consensus. |
 | `/rl word` | Select a few memorable short lines or dialogue excerpts, each with speaker/context and chapter location; add a brief note on why each matters. Keep quotations short and prefer paraphrase when a passage is not essential. |
 
-The reader may add a scope, such as `/rl question 第12章` or `/rl people 只看英伟达早期`. A direct shortcut request is a standalone task and should not be blocked by the guided-reading pause.
+The reader may add a scope, such as `/rl question 第12章`, `/rl critique 作者关于 CUDA 的论证`, or `/rl compare 人工智能相关的这几本书`. A direct shortcut request is a standalone task and should not be blocked by the guided-reading pause. For `/rl compare`, ask for the missing books or topic only if they are not available in the conversation.
 
 - **Quick analysis:** “用 read-loop 快速分析这本书：判断书籍类型，梳理核心主张、结构、关键证据、局限和推荐阅读路线；如果适合时间线，补一条有章节出处的关键事件时间线。”
 - **Timeline:** “用 read-loop 为这本传记/历史书整理一条完整的关键事件时间线。按事件发生时间排序，保留关键转折，标注日期精度和章节出处；不要补造日期。”
