@@ -50,9 +50,14 @@ When the reader types one of these shortcuts, interpret it as the corresponding 
 | `/rl compare` | Compare the available books or authors around the reader's topic: shared questions, different answers, evidence, assumptions, and points of disagreement. Do not force a consensus. |
 | `/rl hot` | Search the web for notable professional reviews and recent reader discussion of the current book; summarize why each result is worth reading, cite links, dates, source type, and any visible popularity evidence. |
 | `/rl word` | Search the web for candidate memorable lines and dialogue, verify them against the supplied edition, and report brief excerpts with chapter and reliable page references when available. |
+| `/rl book` | Switch the current book to the attached or next uploaded book, confirm its identity and readable coverage, then begin whole-book reading. |
 | `/rl read` | Start an optional guided-reading session. Work one section at a time; ask, wait for the reader's recall, then check it against the text. |
 
 The reader may add a scope, such as `/rl question 第12章`, `/rl critique 作者关于 CUDA 的论证`, or `/rl compare 人工智能相关的这几本书`. A direct shortcut request is a standalone task and should not be blocked by the guided-reading pause. For `/rl compare`, ask for the missing books or topic only if they are not available in the conversation.
+
+### Switch the current book
+
+When the reader invokes `/rl book`, make the uploaded book the current book for this conversation and start reading it using the whole-book workflow above. If the command and one book file arrive together, identify that file, inspect its metadata and table of contents, assess extraction quality and coverage, then begin the full-book decomposition without waiting for another prompt. If `/rl book` arrives without a file, ask the reader to upload the book and treat the next uploaded book file as the pending selection, even if it arrives in a later message without repeating the command. For common formats such as PDF and EPUB, use the available document-reading or extraction tools; if extraction is incomplete, state the affected sections and continue with what is readable. If several plausible book files arrive, ask which one should become current. Once switched, explicitly name the new current book; all later `/rl` shortcuts refer to it until another `/rl book` switch. Do not carry over conclusions or source text from the previous book as evidence for the new one. A direct `/rl book` request is not merely an instruction to wait for guided reading: begin the normal whole-book decomposition after confirming the source and coverage.
 
 ### Find notable and recent reviews
 
