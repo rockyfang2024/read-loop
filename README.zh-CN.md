@@ -1,6 +1,6 @@
 # read-loop
 
-**简体中文** · [English](README.md)
+**简体中文** · [English](README.en.md)
 
 **不是替你读完一本书，而是带你读、帮你想起来、再一起核对。**
 
