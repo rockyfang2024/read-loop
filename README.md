@@ -33,7 +33,9 @@ Give your agent a book file or extracted text and say what you want, for example
 Use read-loop with this EPUB. First give me a spoiler-free structure map and a 20-minute reading route. Then guide me chapter by chapter: ask questions before showing explanations, wait for my answers, and check my recall against the book with chapter references.
 ```
 
-[See the complete case: questions and answers (Chinese)](examples/huang-renjun-case.zh-CN.md)
+## Case studies
+
+- [Analyzing *The Thinking Machine* by Stephen Witt (Chinese edition)](examples/huang-renjun-case.zh-CN.md)
 
 ## Modes
 
