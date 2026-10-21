@@ -7,6 +7,8 @@ description: "Coach active book reading with questions and recall."
 
 Help the reader understand a book without turning reading into passive consumption. The reader does the thinking; the AI maps, questions, listens, checks evidence, and gives targeted feedback.
 
+The distinctive product is the **read–recall–feedback loop**, not PDF extraction or unrestricted question answering. Extraction only makes the source available. For an ordinary request to read or analyze a book, guide the reader through a small sequence: map the book, choose a useful section, ask before-reading questions, wait for the reader to read and recall, then check that recall against the source and apply one idea. Do not dump every answer at the start. If the reader explicitly asks for a standalone deliverable (such as a timeline, summary, or list of questions), produce that deliverable directly, grounded in the source, and offer the loop as a next step.
+
 ## Core rules
 
 1. **Do not give away answers before the reader attempts them.** In guided reading, present the pre-reading questions first and wait. After the reader reads, ask for closed-book recall before showing a summary or model answer.
@@ -31,11 +33,35 @@ Infer the mode from the request. If unclear, begin with Scout and offer a sensib
 
 These are natural-language requests, not provider-specific slash commands. The host agent should load this Skill when the user invokes `read-loop` or asks for one of these workflows.
 
+### Short commands
+
+When the reader types one of these shortcuts, interpret it as the corresponding task. These are prompt aliases; they do not require slash-command support from the host app. If no book is attached or available in the current conversation, ask which book they mean.
+
+| Shortcut | Task |
+| --- | --- |
+| `/rl time` | Organize the book's key events into a chronological timeline, with significance and chapter references. Mark uncertain dates; do not invent them. |
+| `/rl question` | Develop the book's core questions for reflection, covering its claims, reasoning, evidence, tensions, and implications. Give questions without answers unless asked. |
+| `/rl people` | Introduce the important people in the book, explain their roles and relationships, and cite the relevant chapters. For fiction, include spoilers only if requested or clearly implied. |
+| `/rl word` | Select a few memorable short lines or dialogue excerpts, each with speaker/context and chapter location; add a brief note on why each matters. Keep quotations short and prefer paraphrase when a passage is not essential. |
+
+The reader may add a scope, such as `/rl question 第12章` or `/rl people 只看英伟达早期`. A direct shortcut request is a standalone task and should not be blocked by the guided-reading pause.
+
 - **Quick analysis:** “用 read-loop 快速分析这本书：判断书籍类型，梳理核心主张、结构、关键证据、局限和推荐阅读路线；如果适合时间线，补一条有章节出处的关键事件时间线。”
 - **Timeline:** “用 read-loop 为这本传记/历史书整理一条完整的关键事件时间线。按事件发生时间排序，保留关键转折，标注日期精度和章节出处；不要补造日期。”
 - **Discussion questions:** “用 read-loop 提炼 8 个由浅入深的讨论问题，覆盖作者主张、证据、因果关系、反例、局限和现实应用；只给问题，不先给答案。”
 - **Guided reading:** “用 read-loop 带我读这本书。每次只处理一章：先给章节作用和不超过三个问题，等我读完并复述后再反馈。”
 - **Compare books:** “用 read-loop 比较这几本书的主张、证据、假设和适用条件，标出真正的分歧，不要强行合并结论。”
+
+## Default first response
+
+When a reader supplies a book and asks to read, understand, or analyze it without specifying a standalone output, do not start with a long-form summary. First inspect enough of the source to establish coverage, book type, structure, and extraction limits. Then return:
+
+1. A compact reading map: central question, thesis hypothesis, major sections, and what is uncertain.
+2. A recommended first section and why it is a good starting point for the reader's likely goal.
+3. At most two pre-reading questions, with no answers shown.
+4. A clear invitation to read that section and return with a closed-book explanation.
+
+Pause for the reader. Continue with recall and feedback only after they respond or explicitly request answer-first analysis. The reader can change modes at any time. Direct requests for a timeline, quote themes, discussion prompts, or other defined outputs should be completed without forcing this pause-first flow.
 
 ## Workflow
 

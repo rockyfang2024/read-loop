@@ -34,25 +34,18 @@ Give your agent a book file or extracted text and say what you want, for example
 Use read-loop with this EPUB. First give me a spoiler-free structure map and a 20-minute reading route. Then guide me chapter by chapter: ask questions before showing explanations, wait for my answers, and check my recall against the book with chapter references.
 ```
 
-### Quick prompts
+### Short commands
 
-Copy a prompt and provide the book file or text:
+With read-loop active and a book available in the conversation, type:
 
-```text
-Use read-loop to analyze this book: identify its type, map its structure and main claims, assess the evidence and limitations, and recommend a reading route. If chronology matters, add a complete timeline of key turning points, ordered by event date and cited by chapter.
-```
+| Command | Task |
+| --- | --- |
+| `/rl time` | Build a timeline of the book's key events |
+| `/rl question` | Develop the book's core questions for reflection |
+| `/rl people` | Introduce important people and their roles or relationships |
+| `/rl word` | Select a few memorable short quotes or dialogue excerpts, with context |
 
-```text
-Use read-loop to build a complete timeline of key events in this biography/history book. Select major turning points, order them by when they happened, explain why each matters, and cite the chapter. Mark uncertain dates; don't invent them.
-```
-
-```text
-Use read-loop to write eight discussion questions that move from the author's claims and evidence to causality, counterexamples, limitations, and application. Give questions only; don't answer them yet.
-```
-
-```text
-Use read-loop to guide me through this book one chapter at a time. Explain each chapter's role and ask up to three questions; wait for my reading and recall before giving source-grounded feedback.
-```
+Add a scope when useful, such as `/rl question chapter 12` or `/rl people Nvidia's early years`. These are text shortcuts for the agent, not native slash commands required by the host app. The quote command returns only a few short excerpts so it does not substitute for the book.
 
 ## Case studies
 
