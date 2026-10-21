@@ -70,6 +70,7 @@ PDF/EPUB 提取只是读取原文的准备步骤，不是项目的核心价值�
 ## 案例列表
 
 - [分析《黄仁勋：英伟达之芯》（美）斯蒂芬·威特](examples/huang-renjun-case.zh-CN.md)
+- [《窄门》核心问题（/rl question）](examples/zhai-men-questions.zh-CN.md)
 
 ## 阅读模式
 
