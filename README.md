@@ -14,6 +14,7 @@ It is designed to keep the reader thinking. The AI prepares a map and questions 
 - **Ask before answering** — get a few guiding questions before reading; explanations wait until after you try to recall the ideas.
 - **Learn from the source** — connect feedback to chapters and sections, and separate the author's claims, the book's evidence, and AI interpretation.
 - **Keep disagreements intact** — compare authors and schools of thought without blending different positions into a false consensus.
+- **Use timelines when chronology matters** — for biographies, histories, and similar books, select key milestones into a complete, chapter-referenced timeline.
 - **Turn ideas into practice** — capture conditions, limitations, applications, and review questions in compact chapter notes.
 - **Work across agents** — use the Agent Skills format without choosing a model provider or installing a reading app.
 
@@ -31,6 +32,26 @@ Give your agent a book file or extracted text and say what you want, for example
 
 ```text
 Use read-loop with this EPUB. First give me a spoiler-free structure map and a 20-minute reading route. Then guide me chapter by chapter: ask questions before showing explanations, wait for my answers, and check my recall against the book with chapter references.
+```
+
+### Quick prompts
+
+Copy a prompt and provide the book file or text:
+
+```text
+Use read-loop to analyze this book: identify its type, map its structure and main claims, assess the evidence and limitations, and recommend a reading route. If chronology matters, add a complete timeline of key turning points, ordered by event date and cited by chapter.
+```
+
+```text
+Use read-loop to build a complete timeline of key events in this biography/history book. Select major turning points, order them by when they happened, explain why each matters, and cite the chapter. Mark uncertain dates; don't invent them.
+```
+
+```text
+Use read-loop to write eight discussion questions that move from the author's claims and evidence to causality, counterexamples, limitations, and application. Give questions only; don't answer them yet.
+```
+
+```text
+Use read-loop to guide me through this book one chapter at a time. Explain each chapter's role and ask up to three questions; wait for my reading and recall before giving source-grounded feedback.
 ```
 
 ## Case studies

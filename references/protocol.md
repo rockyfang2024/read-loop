@@ -45,6 +45,14 @@ Do not assign false precision such as a comprehension percentage unless the read
 - Separate source-backed statements from outside knowledge. If outside knowledge is requested, label it and cite the external source separately.
 - If only excerpts or a preview are available, state the coverage precisely.
 
+## Build a useful timeline
+
+- Decide whether chronology is central or useful from the book's type and argument. It is usually useful for biographies, histories, memoirs, and accounts of a technology, institution, conflict, or movement developing over time. Do not force a timeline onto a concept book whose sequence of ideas matters more than dates.
+- Make the timeline complete at the level of major turning points: include enough milestones to connect the start, transitions, and endpoint of the book's arc. Leave out dates that add no explanatory value.
+- Order milestones by event date, even if the book tells them out of order. Distinguish the event date from the date the author describes or interprets it.
+- Give every entry a chapter or section reference. Mark whether the date is explicit, approximate, a range, or disputed. Use “date not specified” when appropriate; never manufacture precision.
+- Keep the event summary brief and explain its role in the narrative or argument. Do not treat temporal sequence alone as proof of causation.
+
 ## Fast-reading routes
 
 ### Ten-minute scout

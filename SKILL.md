@@ -27,11 +27,23 @@ Infer the mode from the request. If unclear, begin with Scout and offer a sensib
 - **Compare:** User wants to compare authors, arguments, or schools of thought.
 - **Review:** User wants to retrieve and strengthen previously read material.
 
+## Quick-use prompts
+
+These are natural-language requests, not provider-specific slash commands. The host agent should load this Skill when the user invokes `read-loop` or asks for one of these workflows.
+
+- **Quick analysis:** “用 read-loop 快速分析这本书：判断书籍类型，梳理核心主张、结构、关键证据、局限和推荐阅读路线；如果适合时间线，补一条有章节出处的关键事件时间线。”
+- **Timeline:** “用 read-loop 为这本传记/历史书整理一条完整的关键事件时间线。按事件发生时间排序，保留关键转折，标注日期精度和章节出处；不要补造日期。”
+- **Discussion questions:** “用 read-loop 提炼 8 个由浅入深的讨论问题，覆盖作者主张、证据、因果关系、反例、局限和现实应用；只给问题，不先给答案。”
+- **Guided reading:** “用 read-loop 带我读这本书。每次只处理一章：先给章节作用和不超过三个问题，等我读完并复述后再反馈。”
+- **Compare books:** “用 read-loop 比较这几本书的主张、证据、假设和适用条件，标出真正的分歧，不要强行合并结论。”
+
 ## Workflow
 
 ### 1. Check the source and goal
 
 Identify the supplied file or text and confirm that it is the intended book. If a local preparation script is useful, use `scripts/prepare_book.py` to produce a chapter manifest and separate text files. Prefer the reader's existing extractor when it produces better chapter structure. Never copy extracted copyrighted text into this repository.
+
+Infer the book's type from its title page, subtitle, contents, introduction, and other available metadata. Label the type as explicit, inferred, or uncertain. Do not overstate genre when evidence is thin.
 
 Ask only for information that changes the reading route. If the reader has not given a goal or time budget, assume a general understanding goal and propose a 20-minute Scout route.
 
@@ -41,6 +53,7 @@ Read the title, author, table of contents, introduction, conclusion, and chapter
 
 Produce a compact map containing:
 
+- the book's type and whether chronology is central or useful;
 - the central question or problem the book addresses;
 - the author's main thesis, if supported by the source;
 - the book's parts and chapter sequence, with each chapter's role;
@@ -48,6 +61,12 @@ Produce a compact map containing:
 - what remains uncertain because of extraction gaps or unread sections.
 
 Do not present a chapter title as proof of its argument. Verify substantive claims in chapter text.
+
+### Timeline for chronology-rich books
+
+For biographies, histories, memoirs, and other books whose argument depends on change over time, include a timeline in Scout or full-book analysis. Select the events needed to understand the complete arc from its relevant starting point through its conclusion; omit incidental dates and details. For other genres, include a timeline only when sequence, development, or causality is important to the book.
+
+Build the timeline from the source, not from outside knowledge. Sort by when events happened rather than when the author narrates them. For every milestone, include its date or period, event, why it matters to the book's story or argument, and a chapter/section reference. Mark approximate dates as approximate, preserve uncertainty or conflicting accounts, and never infer an exact date from an imprecise passage. If the source does not provide enough chronology, say what is missing instead of filling gaps. Use the timeline template in `references/templates.md`.
 
 ### 3. Choose a reading route
 

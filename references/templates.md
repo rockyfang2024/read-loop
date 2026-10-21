@@ -6,6 +6,7 @@
 # <Book title> — reading map
 
 **Author:** <name>  
+**Book type:** <type; explicit / inferred / uncertain><br>
 **Reader's goal:** <goal or assumed goal>  
 **Coverage:** <full source / selected chapters / excerpts only>
 
@@ -21,6 +22,16 @@
 
 ## Recurring ideas and disagreements
 <Concepts, frameworks, positions that conflict, and the conditions that distinguish them>
+
+## Timeline suitability
+<Whether chronology is central or useful; explain briefly. For chronology-rich books, include the timeline below.>
+
+## Key-event timeline
+<Include only when chronology is central or useful. Cite chapter/section for each entry.>
+
+| Date / period | Event | Why it matters | Source location | Date confidence |
+|---|---|---|---|---|
+| <exact, approximate, or range> | <concise event> | <role in the book's arc or argument> | <chapter / section> | <explicit / approximate / disputed> |
 
 ## Suggested route
 <Short, medium, or deep route; what it skips and the resulting limits>
