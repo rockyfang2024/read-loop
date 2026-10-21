@@ -59,7 +59,6 @@ Add a scope when useful, such as `/rl question chapter 12`, `/rl critique the CU
 
 ## Case studies
 
-- [Analyzing *The Thinking Machine* by Stephen Witt (Chinese edition)](examples/huang-renjun-case.zh-CN.md)
 
 ## Modes
 
