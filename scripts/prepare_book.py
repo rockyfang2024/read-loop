@@ -158,10 +158,16 @@ def _read_epub(path: Path) -> list[tuple[str, str]]:
         raise PreparationError("The EPUB file is not a valid ZIP archive.") from exc
 
 
-def _read_pdf(path: Path) -> list[tuple[str, str]]:
+def _pdf_text_quality(text: str, page_count: int) -> bool:
+    """Reject empty or implausibly sparse extraction, often a sign of scanned pages."""
+    visible = sum(not char.isspace() for char in text)
+    return visible >= max(80, page_count * 12)
+
+
+def _pdf_with_pdftotext(path: Path) -> tuple[str, int]:
     executable = shutil.which("pdftotext")
     if not executable:
-        raise PreparationError("PDF input requires pdftotext (Poppler). Install Poppler, or provide EPUB, Markdown, or TXT.")
+        raise PreparationError("pdftotext (Poppler) is not installed")
     try:
         result = subprocess.run(
             [executable, "-layout", str(path.resolve()), "-"],
@@ -170,12 +176,65 @@ def _read_pdf(path: Path) -> list[tuple[str, str]]:
             timeout=180,
         )
     except subprocess.TimeoutExpired as exc:
-        raise PreparationError("PDF extraction exceeded the 180 second limit.") from exc
+        raise PreparationError("pdftotext timed out after 180 seconds") from exc
     if result.returncode:
         message = result.stderr.decode("utf-8", errors="replace").strip()
-        raise PreparationError(f"pdftotext could not read this PDF: {message or 'unknown error'}")
-    text = result.stdout.decode("utf-8", errors="replace")
-    return _split_text(text, path.stem)
+        raise PreparationError(f"pdftotext failed: {message or 'unknown error'}")
+    return result.stdout.decode("utf-8", errors="replace"), -1
+
+
+def _pdf_with_pypdf(path: Path) -> tuple[str, int]:
+    try:
+        from pypdf import PdfReader
+    except ImportError as exc:
+        raise PreparationError("pypdf is not installed (python3 -m pip install pypdf)") from exc
+    try:
+        reader = PdfReader(str(path), strict=False)
+        if reader.is_encrypted:
+            raise PreparationError("PDF is encrypted; provide an unlocked copy")
+        return "\n\n".join(page.extract_text() or "" for page in reader.pages), len(reader.pages)
+    except PreparationError:
+        raise
+    except Exception as exc:
+        raise PreparationError(f"pypdf failed: {exc}") from exc
+
+
+def _pdf_with_pdfminer(path: Path) -> tuple[str, int]:
+    try:
+        from pdfminer.high_level import extract_text
+    except ImportError as exc:
+        raise PreparationError("pdfminer.six is not installed (python3 -m pip install pdfminer.six)") from exc
+    try:
+        return extract_text(str(path)), -1
+    except Exception as exc:
+        raise PreparationError(f"pdfminer.six failed: {exc}") from exc
+
+
+def _read_pdf(path: Path, backend: str = "auto") -> list[tuple[str, str]]:
+    extractors = {
+        "pdftotext": _pdf_with_pdftotext,
+        "pypdf": _pdf_with_pypdf,
+        "pdfminer": _pdf_with_pdfminer,
+    }
+    order = list(extractors) if backend == "auto" else [backend]
+    errors: list[str] = []
+    for name in order:
+        try:
+            text, page_count = extractors[name](path)
+            if not _pdf_text_quality(text, page_count):
+                errors.append(f"{name}: extracted text is empty or unusually short")
+                continue
+            return _split_text(text, path.stem)
+        except PreparationError as exc:
+            errors.append(f"{name}: {exc}")
+
+    attempted = "; ".join(errors)
+    raise PreparationError(
+        "Could not extract enough text from this PDF. Tried "
+        f"{attempted}. Install Poppler (pdftotext), pypdf, or pdfminer.six. "
+        "If the PDF contains scanned page images, run OCR first (for example, "
+        "ocrmypdf input.pdf output.pdf), then prepare the OCR'd PDF."
+    )
 
 
 def _split_text(text: str, default_title: str) -> list[tuple[str, str]]:
@@ -214,12 +273,12 @@ def _split_text(text: str, default_title: str) -> list[tuple[str, str]]:
     return chunks
 
 
-def _read_source(path: Path) -> list[tuple[str, str]]:
+def _read_source(path: Path, pdf_backend: str = "auto") -> list[tuple[str, str]]:
     suffix = path.suffix.lower()
     if suffix == ".epub":
         chapters = _read_epub(path)
     elif suffix == ".pdf":
-        chapters = _read_pdf(path)
+        chapters = _read_pdf(path, pdf_backend)
     elif suffix in {".md", ".markdown", ".txt"}:
         text = path.read_text(encoding="utf-8-sig", errors="replace")
         chapters = _split_text(text, path.stem)
@@ -238,13 +297,13 @@ def _slug(value: str) -> str:
     return (value[:72] or "chapter")
 
 
-def prepare(path: Path, out: Path | None = None) -> Path:
+def prepare(path: Path, out: Path | None = None, pdf_backend: str = "auto") -> Path:
     path = path.expanduser().resolve(strict=True)
     if not path.is_file():
         raise PreparationError("Input must be a file.")
     if path.stat().st_size > MAX_INPUT_BYTES:
         raise PreparationError("Input file exceeds the 100 MB safety limit.")
-    chapters = _read_source(path)
+    chapters = _read_source(path, pdf_backend)
     output = out.expanduser().resolve() if out else Path(tempfile.mkdtemp(prefix="read-loop-"))
     output.mkdir(parents=True, exist_ok=True)
     chapter_dir = output / "chapters"
@@ -279,9 +338,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("book", type=Path, help="Path to an EPUB, PDF, Markdown, or TXT book")
     parser.add_argument("--out", type=Path, help="Output directory (default: a new temporary directory)")
+    parser.add_argument(
+        "--pdf-backend",
+        choices=("auto", "pdftotext", "pypdf", "pdfminer"),
+        default="auto",
+        help="PDF text extractor; auto tries pdftotext, pypdf, then pdfminer.six",
+    )
     args = parser.parse_args()
     try:
-        output = prepare(args.book, args.out)
+        output = prepare(args.book, args.out, args.pdf_backend)
     except (PreparationError, OSError) as exc:
         print(f"read-loop: {exc}", file=sys.stderr)
         return 2

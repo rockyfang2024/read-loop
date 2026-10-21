@@ -42,7 +42,17 @@ Use read-loop with this EPUB. First give me a spoiler-free structure map and a 2
 
 ## Prepare a book locally
 
-The optional standard-library script splits EPUB, Markdown, and plain-text files into chapter files. It can also process PDFs when `pdftotext` is installed.
+The optional preparation script splits EPUB, Markdown, and plain-text files into chapter files. For PDFs it tries `pdftotext`, `pypdf`, then `pdfminer.six`, using whichever available extractor works. Install one or more backends for PDF support:
+
+```bash
+# Recommended for prose PDFs
+brew install poppler                 # macOS; provides pdftotext
+python3 -m pip install pypdf         # portable fallback
+# Optional fallback
+python3 -m pip install pdfminer.six
+```
+
+Choose a backend explicitly with `--pdf-backend pdftotext|pypdf|pdfminer`; the default is `auto`. If all extractors find little or no text, the script reports that the PDF may be scanned and recommends OCR (for example, `ocrmypdf input.pdf output.pdf`).
 
 ```bash
 python3 scripts/prepare_book.py "/path/to/book.epub"
