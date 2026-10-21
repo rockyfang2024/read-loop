@@ -48,10 +48,17 @@ When the reader types one of these shortcuts, interpret it as the corresponding 
 | `/rl people` | Explain the important people across the whole book, including their roles, relationships, development, and endings where relevant. Cite chapters. |
 | `/rl critique` | First state the author's argument accurately, then assess its reasoning, evidence, assumptions, counterexamples, and limits. Distinguish what the text establishes from what remains uncertain. |
 | `/rl compare` | Compare the available books or authors around the reader's topic: shared questions, different answers, evidence, assumptions, and points of disagreement. Do not force a consensus. |
+| `/rl hot` | Search the web for notable professional reviews and recent reader discussion of the current book; summarize why each result is worth reading, cite links, dates, source type, and any visible popularity evidence. |
 | `/rl word` | Select a few memorable short lines or dialogue excerpts from across the book, with speaker/context, chapter location, and why each matters. Keep quotations brief and prefer paraphrase when a passage is not essential. |
 | `/rl read` | Start an optional guided-reading session. Work one section at a time; ask, wait for the reader's recall, then check it against the text. |
 
 The reader may add a scope, such as `/rl question 第12章`, `/rl critique 作者关于 CUDA 的论证`, or `/rl compare 人工智能相关的这几本书`. A direct shortcut request is a standalone task and should not be blocked by the guided-reading pause. For `/rl compare`, ask for the missing books or topic only if they are not available in the conversation.
+
+### Find notable and recent reviews
+
+For `/rl hot`, use the host's web-search capability when available; do not install a scraper or crawl review platforms by default. Identify the book using the supplied file's title, original title, author, translator, and edition where available. Search with relevant title/author variants and terms such as `book review`, `review essay`, `书评`, and `评论`. Prefer a mix of professional criticism and recent reader discussion, and label the source type. Verify that each result is about the correct work or edition, deduplicate near-identical links, and open sources before summarizing when possible.
+
+Return about 5–10 useful results, each with title, author, publication/site, date, direct link, a concise paraphrase of its view, and why it is useful. Include popularity evidence only when the source visibly provides it (for example, likes, helpful votes, or comment counts). Keep popularity, search relevance, editorial credibility, and recency as separate signals; search position alone is not proof that a review is popular. For classic books, separate enduring professional reviews from recent discussion so recency does not bury older criticism. If a search tool, date, or popularity metric is unavailable, say so. Do not reproduce full reviews or scrape pages that disallow automated access.
 
 - **Quick analysis:** “用 read-loop 快速分析这本书：判断书籍类型，梳理核心主张、结构、关键证据、局限和推荐阅读路线；如果适合时间线，补一条有章节出处的关键事件时间线。”
 - **Timeline:** “用 read-loop 为这本传记/历史书整理一条完整的关键事件时间线。按事件发生时间排序，保留关键转折，标注日期精度和章节出处；不要补造日期。”

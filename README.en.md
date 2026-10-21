@@ -50,10 +50,11 @@ With read-loop active and a book available in the conversation, type:
 | `/rl people` | Explain key people, relationships, development, and endings across the book |
 | `/rl critique` | Assess the argument, evidence, assumptions, and limits after stating it fairly |
 | `/rl compare` | Compare multiple books' answers, evidence, assumptions, and disagreements on a topic |
+| `/rl hot` | Find notable professional reviews and recent discussion, compare views, and cite sources |
 | `/rl word` | Select a few memorable short quotes or dialogue excerpts, with context |
 | `/rl read` | Start optional interactive chapter-by-chapter reading |
 
-Add a scope when useful, such as `/rl question chapter 12`, `/rl critique the CUDA argument`, or `/rl compare these books on AI`. These are text shortcuts for the agent, not native slash commands required by the host app. The quote command returns only a few short excerpts so it does not substitute for the book.
+Add a scope when useful, such as `/rl question chapter 12`, `/rl critique the CUDA argument`, or `/rl compare these books on AI`. These are text shortcuts for the agent, not native slash commands required by the host app. `/rl hot` requires web search from the host; it separates professional reviews from recent discussion and reports only popularity metrics visible on the source pages. Search rank alone is not treated as popularity. The quote command returns only a few short excerpts so it does not substitute for the book.
 
 ## Case studies
 
